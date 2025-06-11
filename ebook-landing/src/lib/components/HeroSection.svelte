@@ -1,7 +1,7 @@
 <script>
   import bookCover from "$assets/book_cover.png";
   import phoneCover from "$assets/phone_cover.png";
-  import Button from "$components"
+  import Button from "./Button.svelte";
 </script>
 
 <section class="hero">
