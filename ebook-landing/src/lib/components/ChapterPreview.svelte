@@ -30,6 +30,12 @@
         "Moving to Spain isn't just about changing your location; it's about immersing yourself in a new way of life. This chapter explore...",
     },
   ];
+
+  let selectedChapterNumber = $state(1);
+
+  function selectChapter(chapter) {
+    selectedChapterNumber = chapter.number;
+  }
 </script>
 
 <section class="chapter-preview default-margin">
@@ -40,8 +46,11 @@
         <li>
           <button
             class="chapter-title"
+            class:selected-chapter-title={selectedChapterNumber ===
+              chapter.number}
             aria-controls={`chapter-info-${chapter.number}`}
-            aria-expanded="true"
+            aria-expanded={selectedChapterNumber === chapter.number}
+            onclick={() => selectChapter(chapter)}
           >
             <h3>Chapter {chapter.number}: {chapter.title}</h3>
           </button>
