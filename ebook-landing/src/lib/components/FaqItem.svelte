@@ -1,18 +1,14 @@
 <script>
   import chevronDown from "$assets/icons/chevron-down.svg";
+
+  let { faq, isExpanded, ...props } = $props();
+  $inspect(faq);
 </script>
 
-<button class="container">
+<button class="container" class:container-expanded={isExpanded} {...props}>
   <div class="question-and-answer">
-    <p class="question mb-s">What will I learn from this ebook?</p>
-    <p class="answer">
-      This ebook provides a comprehensive guide to relocating to Spain, covering
-      everything from securing the right visa and navigating Spain's legal
-      system to finding the perfect place to live and integrating into the local
-      culture. Whether you're moving for work, study, or retirement, this guide
-      equips you with the essential knowledge and practical steps to make your
-      transition as smooth as possible.
-    </p>
+    <p class="question mb-s">{faq.question}</p>
+    <p class="answer">{faq.answer}</p>
   </div>
   <img src={chevronDown} alt="" />
 </button>
