@@ -46,7 +46,7 @@
               {#if job.endDate}
                 / {job.endDate}
               {:else}
-                /present
+                / present
               {/if}
             </p>
           </div>
