@@ -3,6 +3,13 @@
   import image from "$assets/about-me.jpg";
   import Button from "$components/Button.svelte";
   import { goto } from "$app/navigation";
+  import type { DevExperience } from "$lib/types/sanity";
+
+  interface AboutMeProps {
+    workExperience: DevExperience[];
+  }
+
+  let { workExperience } = $props();
 
   function onclick() {
     goto("/#contact-form");
@@ -36,7 +43,7 @@
       <Button className="mt-m" {onclick}>Tell me about your project</Button>
     </div>
   </div>
-  <ExperienceTable />
+  <ExperienceTable {workExperience} />
 </section>
 
 <style>
