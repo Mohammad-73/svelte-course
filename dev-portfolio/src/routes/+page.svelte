@@ -2,10 +2,11 @@
   import { AboutMeSection, HeroSection } from "$components";
 
   const { data } = $props();
-  let { workExperience } = data;
+  let { workExperience, projects } = data;
 
   $inspect(data);
 </script>
 
 <HeroSection />
 <AboutMeSection {workExperience} />
+<MyWorkSection {projects} />
