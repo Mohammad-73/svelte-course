@@ -4,6 +4,7 @@
   interface MyWorkSectionProps {
     projects: ProcessedProject[];
   }
+
   let { projects }: MyWorkSectionProps = $props();
   const mainProject = projects[0];
   const otherProjects = projects.slice(1);
