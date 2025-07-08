@@ -8,3 +8,4 @@ export { default as MyWorkSection } from "./sections/MyWorkSection.svelte";
 export { default as SkillsSection } from "./sections/SkillsSection.svelte";
 export { default as ContactSection } from "./sections/ContactSection.svelte";
 export { default as Header } from "./Header.svelte";
+export { default as Footer } from "./Footer.svelte";
