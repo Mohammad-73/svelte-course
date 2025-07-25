@@ -8,25 +8,34 @@ import {
   PUBLIC_SUPABASE_ANON_KEY,
 } from "$env/static/public";
 import type { LayoutLoad } from "./register/$types";
+import type { Database } from "../lib/types/database.types";
 
 export const load: LayoutLoad = async ({ data, depends, fetch }) => {
   depends("supabase:auth");
   const supabase = isBrowser()
-    ? createBrowserClient(PUBLIC_SUPABASE_URL, PUBLIC_SUPABASE_ANON_KEY, {
-        global: {
-          fetch,
-        },
-      })
-    : createServerClient(PUBLIC_SUPABASE_URL, PUBLIC_SUPABASE_ANON_KEY, {
-        global: {
-          fetch,
-        },
-        cookies: {
-          getAll() {
-            return data.cookies;
+    ? createBrowserClient<Database>(
+        PUBLIC_SUPABASE_URL,
+        PUBLIC_SUPABASE_ANON_KEY,
+        {
+          global: {
+            fetch,
           },
-        },
-      });
+        }
+      )
+    : createServerClient<Database>(
+        PUBLIC_SUPABASE_URL,
+        PUBLIC_SUPABASE_ANON_KEY,
+        {
+          global: {
+            fetch,
+          },
+          cookies: {
+            getAll() {
+              return data.cookies;
+            },
+          },
+        }
+      );
   const {
     data: { session },
   } = await supabase.auth.getSession();
