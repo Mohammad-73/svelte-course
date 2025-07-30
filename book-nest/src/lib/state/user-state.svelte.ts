@@ -9,9 +9,9 @@ interface UserStateProps {
   user: User | null;
 }
 
-interface Book {
+export interface Book {
   author: string | null;
-  cover_Image: string | null;
+  cover_image: string | null;
   created_at: string;
   description: string | null;
   finished_reading_on: string | null;

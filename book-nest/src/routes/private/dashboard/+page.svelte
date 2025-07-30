@@ -1,9 +1,10 @@
 <script lang="ts">
+  import BookCard from "$components/BookCard.svelte";
   import { getUserState } from "../../../lib/state/user-state.svelte";
   import Icon from "@iconify/svelte";
 
   let userContext = getUserState();
-  let { userName } = $derived(userContext);
+  let { userName, allBooks } = $derived(userContext);
 </script>
 
 <div class="dashboard">
@@ -20,8 +21,9 @@
       </p>
     </div>
   </div>
-
-  <!-- Book categories -->
+  {#each allBooks as book}
+    <BookCard {book} />
+  {/each}
 </div>
 
 <style>
