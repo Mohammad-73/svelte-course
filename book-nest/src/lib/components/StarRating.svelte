@@ -5,7 +5,7 @@
     updateDatabaseRating?: (newRating: number) => void;
   }
 
-  let { isReadOnly, value, updateDatabaseRating } = $props();
+  let { isReadOnly, value, updateDatabaseRating }: StarRatingProps = $props();
 
   function handleRating(newRating: number) {
     value = newRating;

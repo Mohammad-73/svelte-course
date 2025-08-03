@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { StarRating } from "$components";
   import type { Book } from "$lib/state/user-state.svelte";
 
   interface BookCardProps {
@@ -26,6 +27,7 @@
   </div>
   <h4>{book.title}</h4>
   <p class="mb-s">{book.author}</p>
+  <StarRating value={book.rating || 0} isReadOnly={true} />
 </a>
 
 <style>
