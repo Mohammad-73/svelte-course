@@ -23,8 +23,16 @@
   </div>
 
   <BookCategory
-    booksToDisplay={allBooks.slice(0, 10)}
+    booksToDisplay={userContext.getHighestRatedBooks()}
     categoryName={"Your favorite books"}
+  />
+  <BookCategory
+    booksToDisplay={userContext.getUnreadBooks()}
+    categoryName={"Recently added, unread books"}
+  />
+  <BookCategory
+    booksToDisplay={allBooks.slice(0, 10)}
+    categoryName={`Highest rated books from your favorite genre: ${userContext.getFavoriteGenre()}`}
   />
 </div>
 
