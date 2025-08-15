@@ -232,4 +232,16 @@
   .input-author p {
     margin-right: 8px;
   }
+
+  :global(.dropzone-cover) {
+    height: 100%;
+    border-radius: 15px;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    border: unset !important;
+    cursor: pointer;
+    border-style: solid !important;
+  }
 </style>
