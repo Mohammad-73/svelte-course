@@ -5,6 +5,11 @@
 
   let isLoading = $state(false);
 
+  interface OpenAiBook {
+    author: string;
+    bookTitle: string;
+  }
+
   async function handleDrop(e: CustomEvent<any>) {
     const { acceptedFiles } = e.detail;
 
@@ -21,6 +26,9 @@
           },
           body: JSON.stringify({ base64: "hi" }),
         });
+
+        const result = (await response.json()) as { bookArray: OpenAiBook[] };
+        console.log(result);
       } catch (error) {
         console.log(error);
       }
