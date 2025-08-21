@@ -1,9 +1,11 @@
 <script lang="ts">
   import Button from "$components/Button.svelte";
+  import { getUserState } from "$lib/state/user-state.svelte";
   import { convertFileToBase64 } from "$lib/utils/openai-helpers";
   import Icon from "@iconify/svelte";
   import Dropzone from "svelte-file-dropzone";
 
+  let userContext = getUserState();
   let isLoading = $state(false);
   let errorMessage = $state("");
   let recognizedBooks = $state<OpenAiBook[]>([]);
@@ -41,6 +43,21 @@
       errorMessage = `Could not upload given file. Are you sure it's an image with a file size of less than 10MB?`;
     }
   }
+
+  function removeBook(index: number) {
+    recognizedBooks.splice(index, 1);
+  }
+
+  async function addAllBooks() {
+    isLoading = true;
+    try {
+      await userContext.addBooksToLibrary(recognizedBooks);
+      isLoading = false;
+      bookSuccessfullyAdded = true;
+    } catch (error: any) {
+      errorMessage = error.message;
+    }
+  }
 </script>
 
 <h2 class="mt-m mb-l">Take a picture to add books</h2>
@@ -59,7 +76,7 @@
         </div>
       {:else}
         <Dropzone
-          on:drop={() => {}}
+          on:drop={handleDrop}
           multiple={false}
           accept="image/*"
           maxSize={10 * 1024 * 1024}
@@ -82,7 +99,7 @@
         </tr>
       </thead>
       <tbody>
-        {#each recognizedBooks as book, i}
+        {#each recognizedBooks as book, index}
           <tr>
             <td>{book.bookTitle}</td>
             <td>{book.author}</td>
@@ -91,7 +108,7 @@
                 type="button"
                 aria-label="Remove book"
                 class="remove-book"
-                onclick={() => console.log(`Delete book with index ${i}`)}
+                onclick={() => removeBook(index)}
               >
                 <Icon icon="streamline:delete-1-solid" width={"30"} />
               </button>
@@ -100,9 +117,7 @@
         {/each}
       </tbody>
     </table>
-    <Button onclick={() => console.log("add all remaining books")}>
-      Add all books
-    </Button>
+    <Button onclick={addAllBooks}>Add all books</Button>
   </div>
 {:else}
   <h4>The selected {recognizedBooks} books have been added to your library.</h4>
